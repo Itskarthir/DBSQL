@@ -1,0 +1,42 @@
+PROG 2
+
+CREATING TABLES
+Create table team(tid int primary key, tname varchar(20), coach varchar(20), captain pid int, city varchar(20);
+
+Create table player(pid int primary key, pname varchar(30), age int, tid int references team(tid));
+
+Create table stadium(sid int primary key, sname varchar(30), pincode(8), city varchar(20));
+
+Create table match(mid int primary, mdate date, time varchar(6), sid int references stadium(sid), team_id references team(tid), team2_id references team(tid), winning team_id Int references team(tid), man of match int references player(pid), check(teamid!= ≠ team2id));
+
+Create table player_phone(pid int references player(pid), phone number(10), primary key (pid, name));
+
+
+INSERTING TABLE DATA
+
+
+insert into table values(1, 'RCB', '101', 'Bangalore');
+
+insert into player values(1001, 'virat', 36, 1);
+
+insert into stadium values(111, ' m chinnaswami', 3698521, 'Bangalore', 'MC');
+
+insert into match values(1111, date '2023-02-23', '12:30', 1, 2, 1, 1001);
+
+insert into phone values(1001, '9620909277');
+
+
+
+QUERIES
+
+
+select pname, tname, age from player p, team where p.tid= tr.tid and age= (select min(age> from players));
+
+select* from stadium where sid in(select from match group by sid having count(sid)= (select max(count(sid)) from match group by sid))
+
+select* from players where pid noti(select captain_pid from team) and pid in(select man of match) from match group by man_of_match having count(man_of_match) >=2);
+
+select* from team where tid in(select winning team_id from match group by winning team_id having count(winning team_id) = (select max (count (winning_team_id)) from match group by (winning_team_id));
+
+select tname from team where tid in( select winning_team_id, sid) having count(*) in (select count(winning_team_id) from match group by winning_team_id));
+
