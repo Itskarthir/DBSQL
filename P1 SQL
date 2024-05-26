@@ -1,0 +1,41 @@
+PROG 1
+
+CREATING TABLES
+Create table student(USN varchar(10) primary key, name varchar(20), address varchar(30), branch id int references branch(brid), sem int);
+
+Create table author(Author id int primary key, aname varchar(15), country(20), age int);
+
+Create table books(bookid int primary key, bname varchar(20), Authorid int references Author(authorid), publisher varchar(30), branchid int references branch(branchid));
+
+Create table bottowed(USN varchar(10) references student(USN), bookid int references books(bookid), borrow_date date);
+
+
+INSERTING TABLE DATA
+
+Insert into table values(1, ‘mca’, ‘ram’);
+Insert into student values(101, ‘harsh’, ‘surat’, 1, 2);
+Insert into Author values(1001, ‘manan’, ‘india’, 40);
+Insert into book values(111, ‘c’, 1001, ‘abc’, 1);
+Insert into borrowed values(101, 111, date ‘2023-03-29’);
+
+
+
+
+
+QUERIES
+1.	Select*from student where sem=2 and branchid in(select branchid from branch where bname=’mca’;
+
+2.	Select*from student where student USN not in(select borrowed USN from borrowed);
+
+3.	Select * student, USN, sname, branch, bname, aname, borrowdate from student, branch book, author, borrowed WHERE student USN = borrowed bookid = book. bookid and book. authorid =author Authorid and student branchid = branch branchid and Student Sem = 2 and branch. brame = ‘mca’;
+
+4.	select count (*) authorid from books Group by authored;
+
+5.	Select * from student where USN in (select USN from borrowed group by usn having count (USN) > = 2);
+
+6.	Select * from student where exists (select br usn from borrowed br join book bk on br. bookid = bk bookid where br USN = S.USN group by usn having count (distinct authorid) > 1);
+
+7.	Select books. bookname from books order by bookname desc;
+ 
+8.	Select * from student S where exists (select USN, Publisher from borrowed join book on borrowrd. bookid = book. bookid where S.USN = borrowed USN group by usn having Count (diptinct Publigher) =1) ;
+
