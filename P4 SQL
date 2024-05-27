@@ -1,0 +1,33 @@
+create table touris place(tpid int primary key, history varchar(40), kilometer number(3), state varchar(30), tpname varchar(20));
+
+create table tourist(tid int primary key, country varchar(40), age int, tname varchar(20));
+
+create table visits(tpid number(3) references tourist_place(tpid), tid int references tourist(tid), vdate primary key(tpid, tid));
+
+create table email(tid int references tourist(tid), email varchar(20), primary key(tid, email));
+
+
+INSERTING TABLE DATA 
+
+
+insert into tourist place values(1, 'coffee', 120, karnataka, coorg);
+
+insert into tourist values(101, 'India', 21, 'karan');
+
+insert into visits values(1, 101, date '2023-02-03');
+
+insert into email values(101, 'karanr.9110@gmail.com');
+
+
+QUERIES
+
+
+Select State from tourist_Place group by State having count (State) = (select max (count (state) from tourist - place group by State);
+
+Select * from tourist_place where tpid in (select tpid from visits group by tpid having count (tpid) = (select max count (tpid)) from visits group by tpid)) ;
+
+Select * from tourist 1 where tid in (Select tid from visits join tourist_place on visits tpid = touristplace pid where State = Karnataka group by tid having count (state) in (Select count (state) from tourist place where = Karnataka)) ;
+
+Select * from tourist 1 where tid in (select tid From visits join tourist_place in visits tid = touristplace tpid group by tid having count (distinct State) in (select count (digtinct state) from tourist- place));
+
+Select * from tourist place where tpid in (select tid from visits Join tourist on visits_id = tourist id group by tpid having count (digtinct country) = Select count (distinct country) from tourist);
